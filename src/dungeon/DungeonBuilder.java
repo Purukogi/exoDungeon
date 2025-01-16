@@ -1,43 +1,45 @@
 package dungeon;
 
+import characters.Monster;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class DungeonBuilder {
 
-    private List<MonsterRoom> monsterRoomList = new ArrayList<>();
-    private List<Room> niceRoomList = new ArrayList<>();
+    private List<Monster> bestiary = new ArrayList<>();
     private Dungeon dungeon;
 
-    public DungeonBuilder(List<MonsterRoom> monsterRoomList, List<Room> niceRoomList) {
-        this.monsterRoomList = monsterRoomList;
-        this.niceRoomList = niceRoomList;
+    public DungeonBuilder(List<Monster> bestiary) {
+        this.bestiary = bestiary;
     }
 
     public void generateDungeon(int size){
         Random rand = new Random();
         List<Room> roomList = new ArrayList<>();
         Dungeon dungeon = new Dungeon(size);
+        Monster randMonster;
 
-        MonsterRoom bossRoom = monsterRoomList.get(rand.nextInt(monsterRoomList.size()));
-        bossRoom.getMonster().setBoss(true);
-        bossRoom.getMonster().setName("King " + bossRoom.getMonster().getName());
-        roomList.add(bossRoom);
+        randMonster = bestiary.get(rand.nextInt(bestiary.size()));
+        roomList.add(new MonsterRoom( new Monster("King " + randMonster.getName(), randMonster.getHealthPoints(), randMonster.getDamageValue(), true)));
 
-        for(int i = 1; i < (size*size)/3; i++){
-            roomList.add(monsterRoomList.get(rand.nextInt(monsterRoomList.size())));
-            System.out.println("Added monster: " + roomList.getLast());
-            roomList.add(niceRoomList.get(rand.nextInt(niceRoomList.size())));
-            System.out.println("Added: " + roomList.getLast().getClass().getSimpleName());
-            System.out.println("---------------------------------------");
+        for(int i = 1; i < (size*size)/3; i ++){
+            randMonster = bestiary.get(rand.nextInt(bestiary.size()));
+            roomList.add(new MonsterRoom( new Monster(randMonster.getName(), randMonster.getHealthPoints(), randMonster.getDamageValue())));
+            int randInt = rand.nextInt(3);
+            if(randInt == 2){
+                roomList.add(new TreasureRoom(rand.nextInt(200)));
+            }else{
+                roomList.add(new HealingRoom());
+            }
         }
+
         for(int i = roomList.size(); i < size*size; i++){
             roomList.add(new EmptyRoom());
         }
-        System.out.println("Number of rooms: " + roomList.size());
+
         roomList = this.randomizeRooms(roomList);
-        System.out.println("Number of rooms: " + roomList.size());
 
         for(Room room : roomList){
             dungeon.addRoom(room);
@@ -60,20 +62,12 @@ public class DungeonBuilder {
         return listToReturn;
     }
 
-    public List<MonsterRoom> getMonsterRoomList() {
-        return monsterRoomList;
+    public List<Monster> getBestiary() {
+        return bestiary;
     }
 
-    public void setMonsterRoomList(List<MonsterRoom> monsterRoomList) {
-        this.monsterRoomList = monsterRoomList;
-    }
-
-    public List<Room> getNiceRoomList() {
-        return niceRoomList;
-    }
-
-    public void setNiceRoomList(List<Room> niceRoomList) {
-        this.niceRoomList = niceRoomList;
+    public void setBestiary(List<Monster> bestiary) {
+        this.bestiary = bestiary;
     }
 
     public Dungeon getDungeon() {

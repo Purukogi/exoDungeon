@@ -23,5 +23,10 @@ public class HealingRoom extends Room {
     public static void setHpRestored(int hpRestored) {
         HealingRoom.hpRestored = hpRestored;
     }
+
+    @Override
+    public String toString(){
+        return super.toString() + "\n" + this.getClass().getSimpleName();
+    }
 }
 

@@ -27,4 +27,9 @@ public class TreasureRoom extends Room{
     public void setGoldInRoom(int goldInRoom) {
         this.goldInRoom = goldInRoom;
     }
+
+    @Override
+    public String toString(){
+        return super.toString() + "\n" + this.getClass().getSimpleName();
+    }
 }

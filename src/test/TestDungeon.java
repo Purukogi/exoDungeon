@@ -81,7 +81,6 @@ public class TestDungeon {
         TreasureRoom room5 = new TreasureRoom(200);
 
         //testing individual rooms and fight mechanics
-
         /*
         room1.exploreRoom(adventurer1);
         room1.exploreRoom(adventurer1);
@@ -100,6 +99,7 @@ public class TestDungeon {
         */
 
         //testing dungeon generation
+        /*
         dungeon.addRoom(room1);
         dungeon.addRoom(room2);
         dungeon.addRoom(room3);
@@ -112,15 +112,20 @@ public class TestDungeon {
         System.out.println(dungeon);
         dungeon.addRoom(room5);
 
-        /*
         System.out.println(room1);
         System.out.println(room2);
         System.out.println(room3);
         System.out.println(room4);
         room5.exploreRoom(adventurer1);
         System.out.println(room5);
+        */
 
-         */
+        MonsterRoom slimeRoom1 = new MonsterRoom(slime);
+        MonsterRoom slimeRoom2 = new MonsterRoom(slime);
+        System.out.println(slimeRoom1.getMonster().getDamageValue());
+        slimeRoom1.getMonster().setDamageValue(30);
+        System.out.println(slimeRoom2.getMonster().getDamageValue());
+
 
     }
 

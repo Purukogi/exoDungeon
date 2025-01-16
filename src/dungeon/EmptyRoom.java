@@ -12,4 +12,9 @@ public class EmptyRoom extends Room {
         }
     }
 
+    @Override
+    public String toString(){
+        return super.toString() + "\n" + this.getClass().getSimpleName();
+    }
+
 }

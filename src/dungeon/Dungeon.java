@@ -46,7 +46,7 @@ public class Dungeon {
         if(roomsGrid.size() == size){
             room.setSouthDoor(false);
         }
-        if(roomsGrid.getLast().size() == 0){
+        if(roomsGrid.getLast().isEmpty()){
             room.setWestDoor(false);
         }
         if(roomsGrid.getLast().size() == size-1){
@@ -72,6 +72,7 @@ public class Dungeon {
         for(List<Room> row : roomsGrid){
             for(Room room : row){
                 result += room.getClass().getSimpleName() + " ";
+                System.out.println(room);
             }
             result += "\n";
         }

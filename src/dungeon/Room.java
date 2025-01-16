@@ -34,7 +34,7 @@ public abstract class Room {
 
     @Override
     public String toString(){
-        String result = "Room visited: " + alreadyExplored + "\n";
+        String result = "";
         if(northDoor){
             result += " O ";
         }else{

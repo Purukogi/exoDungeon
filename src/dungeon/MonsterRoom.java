@@ -30,6 +30,6 @@ public class MonsterRoom extends Room {
 
     @Override
     public String toString(){
-        return monster.getName();
+        return super.toString() + "\n" + monster.getName();
     }
 }
