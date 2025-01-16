@@ -9,6 +9,11 @@ public class Monster extends Character {
         this.isBoss = isBoss;
     }
 
+    public Monster(String name, int healthPoints, int damageValue) {
+        super(name, healthPoints, damageValue);
+        isBoss = false;
+    }
+
     public boolean isBoss() {
         return isBoss;
     }

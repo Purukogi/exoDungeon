@@ -67,7 +67,7 @@ public class TestDungeon {
 
     public static void main(String[] args) {
 
-        Dungeon dungeon = new Dungeon(2);
+        Dungeon dungeon = new Dungeon(3);
 
         Adventurer adventurer1 = new Adventurer("Puru", 50, 10, 1, 1, 1);
 
@@ -104,15 +104,23 @@ public class TestDungeon {
         dungeon.addRoom(room2);
         dungeon.addRoom(room3);
         dungeon.addRoom(room4);
+        dungeon.addRoom(room5);
+        dungeon.addRoom(room5);
+        dungeon.addRoom(room5);
+        dungeon.addRoom(room5);
+        dungeon.addRoom(room5);
         System.out.println(dungeon);
         dungeon.addRoom(room5);
 
+        /*
         System.out.println(room1);
         System.out.println(room2);
         System.out.println(room3);
         System.out.println(room4);
         room5.exploreRoom(adventurer1);
         System.out.println(room5);
+
+         */
 
     }
 

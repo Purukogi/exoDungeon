@@ -27,4 +27,9 @@ public class MonsterRoom extends Room {
     public void setMonster(Monster monster) {
         this.monster = monster;
     }
+
+    @Override
+    public String toString(){
+        return monster.getName();
+    }
 }
