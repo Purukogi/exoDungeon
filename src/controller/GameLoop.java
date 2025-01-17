@@ -31,34 +31,34 @@ public class GameLoop {
         System.out.println("You start at x: " + hero.getxCoord() + ", y: " + hero.getyCoord());
         System.out.println(floor);
          */
-        final int[] gameStop = {0};
+
         JFrame myJFrame = new JFrame();
         myJFrame.addKeyListener(new KeyAdapter(){
+            @Override
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
                 if (keyCode == KeyEvent.VK_UP) {
                     move("up");
+                    printMap();
+                    System.out.println("Where do you want to go?");
                 }
                 else if (keyCode == KeyEvent.VK_DOWN) {
                     move("down");
+                    printMap();
+                    System.out.println("Where do you want to go?");
                 }
                 else if (keyCode == KeyEvent.VK_LEFT) {
                     move("left");
+                    printMap();
+                    System.out.println("Where do you want to go?");
                 }
                 else if (keyCode == KeyEvent.VK_RIGHT) {
                     move("right");
-                }else if (keyCode == KeyEvent.VK_0){
-                    gameStop[0] = 1;
+                    printMap();
+                    System.out.println("Where do you want to go?");
                 }
             }
         });
-
-        do{
-            System.out.println("Where do you want to go?");
-            printMap();
-
-
-        }while(gameStop[0] == 0);
 
     }
 
