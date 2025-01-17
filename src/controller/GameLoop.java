@@ -32,8 +32,10 @@ public class GameLoop {
         System.out.println(floor);
          */
 
-        JFrame myJFrame = new JFrame();
-        myJFrame.addKeyListener(new KeyAdapter(){
+        JFrame ghostFrame = new JFrame();
+        ghostFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ghostFrame.setVisible(true);
+        ghostFrame.addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
@@ -59,6 +61,7 @@ public class GameLoop {
                 }
             }
         });
+
 
     }
 
