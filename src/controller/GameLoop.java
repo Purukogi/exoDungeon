@@ -1,11 +1,12 @@
 package controller;
 
 import characters.Adventurer;
-import characters.Monster;
 import dungeon.Dungeon;
-import dungeon.DungeonBuilder;
 import dungeon.Room;
 
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -23,26 +24,41 @@ public class GameLoop {
     public void startExploration(){
 
         placeHero();
+        System.out.println("You find yourself in an empty room, deep in a dungeon.");
+        printMap();
 
         /*
         System.out.println("You start at x: " + hero.getxCoord() + ", y: " + hero.getyCoord());
         System.out.println(floor);
          */
+        final int[] gameStop = {0};
+        JFrame myJFrame = new JFrame();
+        myJFrame.addKeyListener(new KeyAdapter(){
+            public void keyPressed(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                if (keyCode == KeyEvent.VK_UP) {
+                    move("up");
+                }
+                else if (keyCode == KeyEvent.VK_DOWN) {
+                    move("down");
+                }
+                else if (keyCode == KeyEvent.VK_LEFT) {
+                    move("left");
+                }
+                else if (keyCode == KeyEvent.VK_RIGHT) {
+                    move("right");
+                }else if (keyCode == KeyEvent.VK_0){
+                    gameStop[0] = 1;
+                }
+            }
+        });
 
-        Scanner scan = new Scanner(System.in);
-        int choice = 0;
-
-        System.out.println("You find yourself in an empty room, deep in a dungeon.");
-        printMap();
-
-       do{
-            System.out.println("Where do you want to go: \n\t 1 - North\n\t 2 - East\n\t 3 - South\n\t 4 - West");
-            choice = scan.nextInt();
-
-            move(choice);
+        do{
+            System.out.println("Where do you want to go?");
             printMap();
 
-        }while(choice != -123456789);
+
+        }while(gameStop[0] == 0);
 
     }
 
@@ -67,9 +83,9 @@ public class GameLoop {
         hero.setyCoord(yPos);
     }
 
-    public void move(int direction){
+    public void move(String direction){
         switch (direction){
-            case 1 -> {
+            case "up" -> {
                 if(!floor.getRoomsGrid()
                         .get(hero.getyCoord())
                         .get(hero.getxCoord())
@@ -83,7 +99,7 @@ public class GameLoop {
                             .exploreRoom(hero);
                 }
             }
-            case 2 -> {
+            case "right" -> {
                 if(!floor.getRoomsGrid()
                         .get(hero.getyCoord())
                         .get(hero.getxCoord())
@@ -97,7 +113,7 @@ public class GameLoop {
                             .exploreRoom(hero);
                 }
             }
-            case 3 -> {
+            case "down" -> {
                 if(!floor.getRoomsGrid()
                         .get(hero.getyCoord())
                         .get(hero.getxCoord())
@@ -111,7 +127,7 @@ public class GameLoop {
                             .exploreRoom(hero);
                 }
             }
-            case 4 -> {
+            case "left" -> {
                 if(!floor.getRoomsGrid()
                         .get(hero.getyCoord())
                         .get(hero.getxCoord())
