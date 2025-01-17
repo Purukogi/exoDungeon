@@ -16,16 +16,32 @@ public abstract class Room {
         this.alreadyExplored = alreadyExplored;
     }
 
+    public boolean isNorthDoor() {
+        return northDoor;
+    }
+
     public void setNorthDoor(boolean northDoor) {
         this.northDoor = northDoor;
+    }
+
+    public boolean isEastDoor() {
+        return eastDoor;
     }
 
     public void setEastDoor(boolean eastDoor) {
         this.eastDoor = eastDoor;
     }
 
+    public boolean isSouthDoor() {
+        return southDoor;
+    }
+
     public void setSouthDoor(boolean southDoor) {
         this.southDoor = southDoor;
+    }
+
+    public boolean isWestDoor() {
+        return westDoor;
     }
 
     public void setWestDoor(boolean westDoor) {

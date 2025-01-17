@@ -2,22 +2,12 @@ package characters;
 
 public abstract class Character {
 
-    protected String name;
     protected int healthPoints;
     protected int damageValue;
 
-    public Character(String name, int healthPoints, int damageValue) {
-        this.name = name;
+    public Character(int healthPoints, int damageValue) {
         this.healthPoints = healthPoints;
         this.damageValue = damageValue;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getHealthPoints() {

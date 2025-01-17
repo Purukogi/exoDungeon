@@ -1,5 +1,6 @@
 package dungeon;
 
+import characters.Adventurer;
 import characters.Monster;
 
 import java.util.ArrayList;
@@ -15,14 +16,14 @@ public class DungeonBuilder {
         this.bestiary = bestiary;
     }
 
-    public void generateDungeon(int size){
+    public Dungeon generateDungeon(int size){
         Random rand = new Random();
         List<Room> roomList = new ArrayList<>();
         Dungeon dungeon = new Dungeon(size);
         Monster randMonster;
 
         randMonster = bestiary.get(rand.nextInt(bestiary.size()));
-        roomList.add(new MonsterRoom( new Monster("King " + randMonster.getName(), randMonster.getHealthPoints(), randMonster.getDamageValue(), true)));
+        roomList.add(new MonsterRoom( new Monster("King " + randMonster.getName(), randMonster.getHealthPoints() * 2, randMonster.getDamageValue() + 10, true)));
 
         for(int i = 1; i < (size*size)/3; i ++){
             randMonster = bestiary.get(rand.nextInt(bestiary.size()));
@@ -45,7 +46,7 @@ public class DungeonBuilder {
             dungeon.addRoom(room);
         }
 
-        this.dungeon = dungeon;
+        return dungeon;
     }
 
     public List<Room> randomizeRooms(List<Room> roomList){
@@ -61,6 +62,7 @@ public class DungeonBuilder {
 
         return listToReturn;
     }
+
 
     public List<Monster> getBestiary() {
         return bestiary;

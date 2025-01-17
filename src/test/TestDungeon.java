@@ -69,16 +69,16 @@ public class TestDungeon {
 
         Dungeon dungeon = new Dungeon(3);
 
-        Adventurer adventurer1 = new Adventurer("Puru", 50, 10, 1, 1, 1);
+        Adventurer adventurer1 = new Adventurer(50, 10, 1);
 
         Monster slime = new Monster("Slime", 20, 3, false);
         Monster orc = new Monster("Orc", 50, 10, true);
 
-        EmptyRoom room1 = new EmptyRoom();
-        HealingRoom room2 = new HealingRoom();
-        MonsterRoom room3 = new MonsterRoom(slime);
-        MonsterRoom room4 = new MonsterRoom(orc);
-        TreasureRoom room5 = new TreasureRoom(200);
+        Room room1 = new EmptyRoom();
+        Room room2 = new HealingRoom();
+        Room room3 = new MonsterRoom(slime);
+        Room room4 = new MonsterRoom(orc);
+        Room room5 = new TreasureRoom(200);
 
         //testing individual rooms and fight mechanics
         /*
@@ -99,7 +99,7 @@ public class TestDungeon {
         */
 
         //testing dungeon generation
-        /*
+
         dungeon.addRoom(room1);
         dungeon.addRoom(room2);
         dungeon.addRoom(room3);
@@ -118,13 +118,7 @@ public class TestDungeon {
         System.out.println(room4);
         room5.exploreRoom(adventurer1);
         System.out.println(room5);
-        */
 
-        MonsterRoom slimeRoom1 = new MonsterRoom(slime);
-        MonsterRoom slimeRoom2 = new MonsterRoom(slime);
-        System.out.println(slimeRoom1.getMonster().getDamageValue());
-        slimeRoom1.getMonster().setDamageValue(30);
-        System.out.println(slimeRoom2.getMonster().getDamageValue());
 
 
     }

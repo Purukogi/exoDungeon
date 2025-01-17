@@ -5,11 +5,9 @@ public class Adventurer extends Character {
     private int goldPieces;
     private int xCoord, yCoord;
 
-    public Adventurer(String name, int healthPoints, int damageValue, int goldPieces, int xCoord, int yCoord) {
-        super(name, healthPoints, damageValue);
+    public Adventurer(int healthPoints, int damageValue, int goldPieces) {
+        super(healthPoints, damageValue);
         this.goldPieces = goldPieces;
-        this.xCoord = xCoord;
-        this.yCoord = yCoord;
     }
 
     public void startFight(Monster monster){
@@ -38,6 +36,7 @@ public class Adventurer extends Character {
 
         if(this.getHealthPoints() <= 0){
             System.out.println("You've been defeated... Better luck next time...");
+            System.exit(0);
         }
 
     }

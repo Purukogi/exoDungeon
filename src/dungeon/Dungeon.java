@@ -54,6 +54,7 @@ public class Dungeon {
         }
     }
 
+
     public int getSize() {
         return size;
     }
@@ -72,7 +73,7 @@ public class Dungeon {
         for(List<Room> row : roomsGrid){
             for(Room room : row){
                 result += room.getClass().getSimpleName() + " ";
-                System.out.println(room);
+                //System.out.println(room);
             }
             result += "\n";
         }
