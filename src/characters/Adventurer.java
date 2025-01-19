@@ -21,7 +21,7 @@ public class Adventurer extends Character {
 
                 System.out.println("You won! " + monster.getName() + " is no more!");
                 if (monster.isBoss()){
-                    System.out.println("You defeated the boss of this dungeon! Congratulations !");
+                    System.out.println("You defeated the boss of this dungeon! Congratulations!");
                     System.exit(0);
                 }
                 break;

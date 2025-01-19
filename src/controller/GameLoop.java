@@ -25,8 +25,8 @@ public class GameLoop {
 
         placeHero();
         System.out.println("You find yourself in an empty room, deep in a dungeon.");
-        printMap();
-
+        System.out.println(getMap());
+        System.out.println("Where do you want to go?");
         /*
         System.out.println("You start at x: " + hero.getxCoord() + ", y: " + hero.getyCoord());
         System.out.println(floor);
@@ -41,22 +41,22 @@ public class GameLoop {
                 int keyCode = e.getKeyCode();
                 if (keyCode == KeyEvent.VK_UP) {
                     move("up");
-                    printMap();
+                    System.out.println(getMap());
                     System.out.println("Where do you want to go?");
                 }
                 else if (keyCode == KeyEvent.VK_DOWN) {
                     move("down");
-                    printMap();
+                    System.out.println(getMap());
                     System.out.println("Where do you want to go?");
                 }
                 else if (keyCode == KeyEvent.VK_LEFT) {
                     move("left");
-                    printMap();
+                    System.out.println(getMap());
                     System.out.println("Where do you want to go?");
                 }
                 else if (keyCode == KeyEvent.VK_RIGHT) {
                     move("right");
-                    printMap();
+                    System.out.println(getMap());
                     System.out.println("Where do you want to go?");
                 }
             }
@@ -148,7 +148,7 @@ public class GameLoop {
         }
     }
 
-    public void printMap(){
+    public String getMap(){
         String map = "";
         for(int i = 0; i < floor.getSize(); i++){
             for(int j = 0; j < floor.getSize(); j++){
@@ -164,7 +164,7 @@ public class GameLoop {
             }
             map += "\n";
         }
-        System.out.println(map);
+        return map;
     }
 
     public char getCrossing(Room room){
