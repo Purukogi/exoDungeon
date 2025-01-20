@@ -6,7 +6,7 @@ public abstract class Room {
 
     protected boolean alreadyExplored = false, northDoor = true, eastDoor = true, southDoor = true, westDoor = true;
 
-    public abstract void exploreRoom(Adventurer adventurer);
+    public abstract String exploreRoom(Adventurer adventurer);
 
     public boolean isAlreadyExplored() {
         return alreadyExplored;

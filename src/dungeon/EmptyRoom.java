@@ -5,11 +5,12 @@ import characters.Adventurer;
 public class EmptyRoom extends Room {
 
     @Override
-    public void exploreRoom(Adventurer adventurer) {
+    public String exploreRoom(Adventurer adventurer) {
         if(!this.isAlreadyExplored()){
-            System.out.println("The room is empty... You find nothing of value.");
             this.setAlreadyExplored(true);
+            return "The room is empty... You find nothing of value.";
         }
+        return "";
     }
 
     @Override

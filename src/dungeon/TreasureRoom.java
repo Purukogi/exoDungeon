@@ -11,13 +11,15 @@ public class TreasureRoom extends Room{
     }
 
     @Override
-    public void exploreRoom(Adventurer adventurer){
+    public String exploreRoom(Adventurer adventurer){
         if(!this.isAlreadyExplored()){
-            System.out.println("You found a treasure room! You manage to scavenge " + goldInRoom + " gold pieces.");
+            String result = "You found a treasure room! You manage to scavenge " + goldInRoom + " gold pieces.";
             adventurer.setGoldPieces(adventurer.getGoldPieces() + goldInRoom);
-            System.out.println("\tYour gold: " + adventurer.getGoldPieces());
+            result += "\n\t Your gold: " + adventurer.getGoldPieces();
             this.setAlreadyExplored(true);
+            return result;
         }
+        return "";
     }
 
     public int getGoldInRoom() {

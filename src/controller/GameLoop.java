@@ -15,6 +15,7 @@ public class GameLoop {
 
     private Dungeon floor;
     private Adventurer hero;
+    private GUI gui;
 
     public GameLoop(Dungeon floor, Adventurer hero) {
         this.floor = floor;
@@ -24,45 +25,47 @@ public class GameLoop {
     public void startExploration(){
 
         placeHero();
-        System.out.println("You find yourself in an empty room, deep in a dungeon.");
-        System.out.println(getMap());
-        System.out.println("Where do you want to go?");
-        /*
-        System.out.println("You start at x: " + hero.getxCoord() + ", y: " + hero.getyCoord());
-        System.out.println(floor);
-         */
 
-        JFrame ghostFrame = new JFrame();
-        ghostFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ghostFrame.setVisible(true);
-        ghostFrame.addKeyListener(new KeyAdapter(){
-            @Override
-            public void keyPressed(KeyEvent e) {
-                int keyCode = e.getKeyCode();
-                if (keyCode == KeyEvent.VK_UP) {
-                    move("up");
-                    System.out.println(getMap());
-                    System.out.println("Where do you want to go?");
-                }
-                else if (keyCode == KeyEvent.VK_DOWN) {
-                    move("down");
-                    System.out.println(getMap());
-                    System.out.println("Where do you want to go?");
-                }
-                else if (keyCode == KeyEvent.VK_LEFT) {
-                    move("left");
-                    System.out.println(getMap());
-                    System.out.println("Where do you want to go?");
-                }
-                else if (keyCode == KeyEvent.VK_RIGHT) {
-                    move("right");
-                    System.out.println(getMap());
-                    System.out.println("Where do you want to go?");
-                }
-            }
-        });
+        if(gui == null){
+            System.out.println("You find yourself in an empty room, deep in a dungeon.");
+            System.out.println(getMap());
+            System.out.println("Where do you want to go?");
 
+            JFrame ghostFrame = new JFrame();
+            ghostFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            ghostFrame.setVisible(true);
+            ghostFrame.addKeyListener(new KeyAdapter(){
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    int keyCode = e.getKeyCode();
+                    if (keyCode == KeyEvent.VK_UP) {
+                        System.out.println(move("up"));
+                        System.out.println(getMap());
+                        System.out.println("Where do you want to go?");
+                    }
+                    else if (keyCode == KeyEvent.VK_DOWN) {
+                        System.out.println(move("down"));
+                        System.out.println(getMap());
+                        System.out.println("Where do you want to go?");
+                    }
+                    else if (keyCode == KeyEvent.VK_LEFT) {
+                        System.out.println(move("left"));
+                        System.out.println(getMap());
+                        System.out.println("Where do you want to go?");
+                    }
+                    else if (keyCode == KeyEvent.VK_RIGHT) {
+                        System.out.println(move("right"));
+                        System.out.println(getMap());
+                        System.out.println("Where do you want to go?");
+                    }
+                }
+            });
 
+        }else{
+            gui.updateEvents("You find yourself in an empty room, deep in a dungeon.");
+            gui.updateMap();
+            gui.updateEvents("Where do you want to go?");
+        }
     }
 
     public void placeHero(){
@@ -86,17 +89,18 @@ public class GameLoop {
         hero.setyCoord(yPos);
     }
 
-    public void move(String direction){
+    public String move(String direction){
         switch (direction){
             case "up" -> {
                 if(!floor.getRoomsGrid()
                         .get(hero.getyCoord())
                         .get(hero.getxCoord())
                         .isNorthDoor()){
-                    System.out.println("The northern exit of the room caved in, you can't go through...");
+                    return "The northern exit of the room caved in, you can't go through...";
+
                 }else{
                     hero.setyCoord(hero.getyCoord() - 1);
-                    floor.getRoomsGrid()
+                    return floor.getRoomsGrid()
                             .get(hero.getyCoord())
                             .get(hero.getxCoord())
                             .exploreRoom(hero);
@@ -107,10 +111,11 @@ public class GameLoop {
                         .get(hero.getyCoord())
                         .get(hero.getxCoord())
                         .isEastDoor()){
-                    System.out.println("The eastern exit of the room caved in, you can't go through...");
+                    return "The eastern exit of the room caved in, you can't go through...";
+
                 }else{
                     hero.setxCoord(hero.getxCoord() + 1);
-                    floor.getRoomsGrid()
+                    return floor.getRoomsGrid()
                             .get(hero.getyCoord())
                             .get(hero.getxCoord())
                             .exploreRoom(hero);
@@ -121,10 +126,11 @@ public class GameLoop {
                         .get(hero.getyCoord())
                         .get(hero.getxCoord())
                         .isSouthDoor()){
-                    System.out.println("The southern exit of the room caved in, you can't go through...");
+                    return "The southern exit of the room caved in, you can't go through...";
+
                 }else{
                     hero.setyCoord(hero.getyCoord() + 1);
-                    floor.getRoomsGrid()
+                    return floor.getRoomsGrid()
                             .get(hero.getyCoord())
                             .get(hero.getxCoord())
                             .exploreRoom(hero);
@@ -135,17 +141,18 @@ public class GameLoop {
                         .get(hero.getyCoord())
                         .get(hero.getxCoord())
                         .isWestDoor()){
-                    System.out.println("The western exit of the room caved in, you can't go through...");
+                    return "The western exit of the room caved in, you can't go through...";
+
                 }else{
                     hero.setxCoord(hero.getxCoord() - 1);
-                    floor.getRoomsGrid()
+                    return floor.getRoomsGrid()
                             .get(hero.getyCoord())
                             .get(hero.getxCoord())
                             .exploreRoom(hero);
                 }
             }
-            default -> System.out.println("Invalid direction input.");
         }
+        return "Invalid direction input.";
     }
 
     public String getMap(){
@@ -213,5 +220,13 @@ public class GameLoop {
 
     public void setHero(Adventurer hero) {
         this.hero = hero;
+    }
+
+    public GUI getGui() {
+        return gui;
+    }
+
+    public void setGui(GUI gui) {
+        this.gui = gui;
     }
 }

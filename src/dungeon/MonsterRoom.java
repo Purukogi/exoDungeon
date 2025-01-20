@@ -12,12 +12,14 @@ public class MonsterRoom extends Room {
     }
 
     @Override
-    public void exploreRoom(Adventurer adventurer) {
+    public String exploreRoom(Adventurer adventurer) {
         if(!this.isAlreadyExplored()){
-            System.out.println("You entered the " + monster.getName() +"'s room! A fight ensues!");
-            adventurer.startFight(monster);
+            String result = "You entered the " + monster.getName() +"'s room! A fight ensues!";
+            result += adventurer.startFight(monster);
             this.setAlreadyExplored(true);
+            return result;
         }
+        return "";
     }
 
     public Monster getMonster() {

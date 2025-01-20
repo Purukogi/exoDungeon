@@ -7,13 +7,15 @@ public class HealingRoom extends Room {
     private static int hpRestored = 20;
 
     @Override
-    public void exploreRoom(Adventurer adventurer) {
+    public String exploreRoom(Adventurer adventurer) {
         if(!this.isAlreadyExplored()){
-            System.out.println("You find a healing bassin. Your health is restored by " + hpRestored +".");
+            String result = "You find a healing bassin. Your health is restored by " + hpRestored +".";
             adventurer.setHealthPoints(adventurer.getHealthPoints() + hpRestored);
-            System.out.println("\tYour health: " + adventurer.getHealthPoints());
+            result += "\n\tYour health: " + adventurer.getHealthPoints();
             this.setAlreadyExplored(true);
+            return result;
         }
+        return "";
     }
 
     public static int getHpRestored() {

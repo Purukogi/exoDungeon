@@ -10,35 +10,36 @@ public class Adventurer extends Character {
         this.goldPieces = goldPieces;
     }
 
-    public void startFight(Monster monster){
+    public String startFight(Monster monster){
+        String result = "";
         while(this.getHealthPoints() > 0){
 
-            System.out.println("You hit " + monster.getName() + " for " + this.getDamageValue() +" damage!");
+            result += "You hit " + monster.getName() + " for " + this.getDamageValue() +" damage! \n";
             monster.setHealthPoints(monster.getHealthPoints() - this.getDamageValue());
-            System.out.println("\t" + monster.getName() + "'s health: " + monster.getHealthPoints());
+            result += "\t" + monster.getName() + "'s health: " + monster.getHealthPoints() + "\n";
 
             if(monster.getHealthPoints() <= 0){
 
-                System.out.println("You won! " + monster.getName() + " is no more!");
+                result += "You won! " + monster.getName() + " is no more! \n";
                 if (monster.isBoss()){
-                    System.out.println("You defeated the boss of this dungeon! Congratulations!");
+                    result += "You defeated the boss of this dungeon! Congratulations!";
                     System.exit(0);
                 }
                 break;
 
             }
 
-            System.out.println(monster.getName() + " hits you for " + monster.getDamageValue() + " damage!");
+            result += monster.getName() + " hits you for " + monster.getDamageValue() + " damage! \n";
             this.setHealthPoints(this.getHealthPoints() - monster.getDamageValue());
-            System.out.println("\tYour health: " + this.getHealthPoints());
+            result += "\tYour health: " + this.getHealthPoints() + "\n";
 
         }
 
         if(this.getHealthPoints() <= 0){
-            System.out.println("You've been defeated... Better luck next time...");
+            result += "You've been defeated... Better luck next time...";
             System.exit(0);
         }
-
+        return result;
     }
 
     public int getGoldPieces() {
