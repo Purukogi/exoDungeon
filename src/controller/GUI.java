@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 public class GUI {
 
+    private JFrame gameWindow = new JFrame("Dungeon Explorer");
     private JTextPane eventPane = new JTextPane();
     private JTextPane mapPane = new JTextPane();
     private GameLoop instance;
@@ -22,12 +23,12 @@ public class GUI {
 
     public void openGameWindow(){
 
-        JFrame gameWindow = new JFrame("Dungeon Explorer");
         GridLayout windowLayout = new GridLayout(1, 2);
         gameWindow.setLayout(windowLayout);
         gameWindow.setSize(600, 400);
         gameWindow.setLocation(300, 200);
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
         //panel regrouping the map and control buttons
         final JPanel mapButtonsPanel = new JPanel(new GridLayout(2, 1));
@@ -64,32 +65,40 @@ public class GUI {
         upButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                updateEvents(instance.move("up"));
+                String buffer = instance.move("up");
+                updateEvents(buffer);
                 updateMap();
+                checkGameEnd(buffer);
             }
         });
 
         rightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                updateEvents(instance.move("right"));
+                String buffer = instance.move("right");
+                updateEvents(buffer);
                 updateMap();
+                checkGameEnd(buffer);
             }
         });
 
         downButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                updateEvents(instance.move("down"));
+                String buffer = instance.move("down");
+                updateEvents(buffer);
                 updateMap();
+                checkGameEnd(buffer);
             }
         });
 
         leftButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                updateEvents(instance.move("left"));
+                String buffer = instance.move("left");
+                updateEvents(buffer);
                 updateMap();
+                checkGameEnd(buffer);
             }
         });
 
@@ -121,6 +130,37 @@ public class GUI {
         eventPane.setCharacterAttributes(aset, false);
         eventPane.replaceSelection("\n" + event);
 
+    }
+
+    public void checkGameEnd(String event){
+        if(!event.isEmpty() && event.charAt(event.length() - 1) == '♕'){
+
+            JFrame victoryWindow = new JFrame("VICTORY");
+            victoryWindow.setSize(250, 80);
+            victoryWindow.setLocation(475, 360);
+            victoryWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            JTextArea victoryMessageArea = new JTextArea();
+            victoryMessageArea.setText("You beat the boss of the dungeon! \n You can now close the application.");
+            victoryWindow.add(victoryMessageArea);
+            victoryWindow.setVisible(true);
+            victoryWindow.setAlwaysOnTop(true);
+            victoryWindow.setAutoRequestFocus(true);
+
+        }
+        if(!event.isEmpty() && event.charAt(event.length() - 1) == '☠'){
+
+            JFrame defeatWindow = new JFrame("DEFEAT");
+            defeatWindow.setSize(250, 80);
+            defeatWindow.setLocation(475, 360);
+            defeatWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            JTextArea defeatMessageArea = new JTextArea();
+            defeatMessageArea.setText("You died! \n You can now close the application.");
+            defeatWindow.add(defeatMessageArea);
+            defeatWindow.setVisible(true);
+            defeatWindow.setAlwaysOnTop(true);
+            defeatWindow.setAutoRequestFocus(true);
+
+        }
     }
 
     public JTextPane getEventPane() {

@@ -22,8 +22,7 @@ public class Adventurer extends Character {
 
                 result += "You won! " + monster.getName() + " is no more! \n";
                 if (monster.isBoss()){
-                    result += "You defeated the boss of this dungeon! Congratulations!";
-                    System.exit(0);
+                    result += "You defeated the boss of this dungeon! Congratulations!♕";
                 }
                 break;
 
@@ -36,8 +35,7 @@ public class Adventurer extends Character {
         }
 
         if(this.getHealthPoints() <= 0){
-            result += "You've been defeated... Better luck next time...";
-            System.exit(0);
+            result += "You've been defeated... Better luck next time...☠";
         }
         return result;
     }
