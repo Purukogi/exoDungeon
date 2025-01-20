@@ -1,30 +1,17 @@
 package test;
 
-import characters.Monster;
+import biomes.Biomes;
 import dungeon.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TestDungeonBuilder {
 
     public static void main(String[] args) {
 
-        Monster slime = new Monster("Slime", 20, 3);
-        Monster orc = new Monster("Orc", 50, 10);
-        Monster goblin = new Monster("Goblin", 30, 5);
-        Monster wolf = new Monster("Wolf", 20, 10);
-        List<Monster> bestiary = new ArrayList<>();
-        bestiary.add(slime);
-        bestiary.add(orc);
-        bestiary.add(goblin);
-        bestiary.add(wolf);
+        Dungeon floor = new Dungeon();
 
-        DungeonBuilder builder = new DungeonBuilder(bestiary);
+        floor.generateDungeon(5, Biomes.FOREST);
 
-        builder.generateDungeon(5);
-
-        System.out.println(builder.getDungeon());
+        System.out.println(floor);
     }
 
 }

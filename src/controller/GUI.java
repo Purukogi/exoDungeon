@@ -115,7 +115,7 @@ public class GUI {
         aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
 
         mapPane.setCharacterAttributes(aset, false);
-        mapPane.setText(instance.getMap() + "\n Health: " + instance.getHero().getHealthPoints() + "\n Gold: " + instance.getHero().getGoldPieces());
+        mapPane.setText(instance.getMap() + "\nHealth: " + instance.getHero().getHealthPoints() + "\nGold: " + instance.getHero().getGoldPieces());
     }
 
     public void updateEvents(String event){
