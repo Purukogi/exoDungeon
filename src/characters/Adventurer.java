@@ -1,9 +1,17 @@
 package characters;
 
+import items.Armour;
+import items.Boots;
+import items.Inventory;
+import items.Weapon;
+
+import java.util.PropertyResourceBundle;
+
 public class Adventurer extends Character {
 
     private int goldPieces;
     private int xCoord, yCoord;
+    private Inventory inventory = new Inventory();
 
     public Adventurer(int healthPoints, int damageValue, int goldPieces) {
         super(healthPoints, damageValue);
@@ -12,10 +20,27 @@ public class Adventurer extends Character {
 
     public String startFight(Monster monster){
         String result = "";
+        int adventurerDamage = damageValue;
+        if(inventory.getEquipment().get("Weapon 1") != null){
+            adventurerDamage += ((Weapon) inventory.getEquipment().get("Weapon 1")).getAttackBoost();
+        }
+        if(inventory.getEquipment().get("Weapon 2") != null){
+            adventurerDamage += ((Weapon) inventory.getEquipment().get("Weapon 2")).getAttackBoost();
+        }
+        int monsterDamage = monster.getDamageValue();
+        if(inventory.getEquipment().get("Armour") != null){
+            monsterDamage -= ((Armour) inventory.getEquipment().get("Armour")).getDefenseBoost();
+        }
+        if(inventory.getEquipment().get("Boots") != null){
+            monsterDamage -= ((Boots) inventory.getEquipment().get("Boots")).getDefenseBoost();
+        }
+        monsterDamage = Math.max(monsterDamage, 0);
+
+
         while(this.getHealthPoints() > 0){
 
-            result += "You hit " + monster.getName() + " for " + this.getDamageValue() +" damage! \n";
-            monster.setHealthPoints(monster.getHealthPoints() - this.getDamageValue());
+            result += "You hit " + monster.getName() + " for " + adventurerDamage +" damage! \n";
+            monster.setHealthPoints(monster.getHealthPoints() - adventurerDamage);
             result += "\t" + monster.getName() + "'s health: " + monster.getHealthPoints() + "\n";
 
             if(monster.getHealthPoints() <= 0){
@@ -28,8 +53,8 @@ public class Adventurer extends Character {
 
             }
 
-            result += monster.getName() + " hits you for " + monster.getDamageValue() + " damage! \n";
-            this.setHealthPoints(this.getHealthPoints() - monster.getDamageValue());
+            result += monster.getName() + " hits you for " + monsterDamage + " damage! \n";
+            this.setHealthPoints(this.getHealthPoints() - monsterDamage);
             result += "\tYour health: " + this.getHealthPoints() + "\n";
 
         }
@@ -62,6 +87,14 @@ public class Adventurer extends Character {
 
     public void setyCoord(int yCoord) {
         this.yCoord = yCoord;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 }
 

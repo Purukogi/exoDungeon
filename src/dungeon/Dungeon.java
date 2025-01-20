@@ -2,6 +2,10 @@ package dungeon;
 
 import biomes.Biomes;
 import characters.Monster;
+import items.Armour;
+import items.Boots;
+import items.Item;
+import items.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +15,18 @@ public class Dungeon {
 
     private int size;
     private List<List<Room>> roomsGrid = new ArrayList<List<Room>>();
+    private Biomes biome;
 
     public Dungeon(int size) {
         this.size = size;
     }
 
     public Dungeon() {}
+
+    public Dungeon(int size, Biomes biome) {
+        this.size = size;
+        this.biome = biome;
+    }
 
     public void addRoom(Room room){
 
@@ -60,17 +70,28 @@ public class Dungeon {
         }
     }
 
-    public void generateDungeon(int size, Biomes biomes){
-        this.size = size;
+    public void generateDungeon(){
+
         Random rand = new Random();
         List<Room> roomList = new ArrayList<>();
         Monster randMonster;
 
-        randMonster = biomes.getRandomMonster();
+        randMonster = biome.getRandomMonster();
         roomList.add(new MonsterRoom( new Monster("King " + randMonster.getName(), randMonster.getHealthPoints() + 30, randMonster.getDamageValue() + 5, true)));
 
+        //FOR NOW WE PUT A FIXED MERCHANT ROOM
+
+        Armour plate = new Armour("Plate Armour", 300, 10);
+        Armour chainmail = new Armour("Chainmail", 150, 5);
+        Weapon rapier = new Weapon("Rapier", 200, 10, false);
+        Weapon knife = new Weapon("Knife", 100, 5, false);
+        Boots leather = new Boots("Leather Boots", 150, 5);
+        Item[] merchantInventory = {plate, chainmail, rapier, knife, leather};
+        roomList.add(new MerchantRoom(merchantInventory));
+
+
         for(int i = 1; i < (size*size)/3; i ++){
-            randMonster = biomes.getRandomMonster();
+            randMonster = biome.getRandomMonster();
             roomList.add(new MonsterRoom( new Monster(randMonster.getName(), randMonster.getHealthPoints(), randMonster.getDamageValue())));
             int randInt = rand.nextInt(3);
             if(randInt == 2){

@@ -7,9 +7,9 @@ public class TestDungeonBuilder {
 
     public static void main(String[] args) {
 
-        Dungeon floor = new Dungeon();
+        Dungeon floor = new Dungeon(5, Biomes.CAVE);
 
-        floor.generateDungeon(5, Biomes.FOREST);
+        floor.generateDungeon();
 
         System.out.println(floor);
     }

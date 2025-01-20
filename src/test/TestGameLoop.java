@@ -11,8 +11,8 @@ public class TestGameLoop {
 
         Adventurer hero = new Adventurer(100, 10, 50);
 
-        Dungeon floor = new Dungeon();
-        floor.generateDungeon(5, Biomes.FOREST);
+        Dungeon floor = new Dungeon(5, Biomes.FOREST);
+        floor.generateDungeon();
 
         GameLoop loop = new GameLoop(floor, hero);
 
