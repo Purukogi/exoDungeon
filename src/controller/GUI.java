@@ -125,10 +125,8 @@ public class GUI {
         aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
         aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
 
-        int len = eventPane.getDocument().getLength();
-        eventPane.setCaretPosition(len);
         eventPane.setCharacterAttributes(aset, false);
-        eventPane.replaceSelection("\n" + event);
+        eventPane.setText(event);
 
     }
 

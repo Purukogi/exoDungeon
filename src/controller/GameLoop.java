@@ -62,9 +62,8 @@ public class GameLoop {
             });
 
         }else{
-            gui.updateEvents("You find yourself in an empty room, deep in a dungeon.");
+            gui.updateEvents("You find yourself in an empty room, deep in a dungeon.\n Where do you want to go?");
             gui.updateMap();
-            gui.updateEvents("Where do you want to go?");
         }
     }
 
@@ -163,7 +162,11 @@ public class GameLoop {
                     map += 'H';
                 }else {
                     if (floor.getRoomsGrid().get(i).get(j).isAlreadyExplored()){
-                        map += getCrossing(floor.getRoomsGrid().get(i).get(j));
+                        if(floor.getRoomsGrid().get(i).get(j).getClass().getSimpleName().equals("MerchantRoom")){
+                            map += '$';
+                        }else{
+                            map += getCrossing(floor.getRoomsGrid().get(i).get(j));
+                        }
                     }else{
                         map += '█';
                     }

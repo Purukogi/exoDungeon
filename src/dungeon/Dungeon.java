@@ -2,10 +2,6 @@ package dungeon;
 
 import biomes.Biomes;
 import characters.Monster;
-import items.Armour;
-import items.Boots;
-import items.Item;
-import items.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +16,6 @@ public class Dungeon {
     public Dungeon(int size) {
         this.size = size;
     }
-
-    public Dungeon() {}
 
     public Dungeon(int size, Biomes biome) {
         this.size = size;
@@ -79,16 +73,7 @@ public class Dungeon {
         randMonster = biome.getRandomMonster();
         roomList.add(new MonsterRoom( new Monster("King " + randMonster.getName(), randMonster.getHealthPoints() + 30, randMonster.getDamageValue() + 5, true)));
 
-        //FOR NOW WE PUT A FIXED MERCHANT ROOM
-
-        Armour plate = new Armour("Plate Armour", 300, 10);
-        Armour chainmail = new Armour("Chainmail", 150, 5);
-        Weapon rapier = new Weapon("Rapier", 200, 10, false);
-        Weapon knife = new Weapon("Knife", 100, 5, false);
-        Boots leather = new Boots("Leather Boots", 150, 5);
-        Item[] merchantInventory = {plate, chainmail, rapier, knife, leather};
-        roomList.add(new MerchantRoom(merchantInventory));
-
+        roomList.add(new MerchantRoom());
 
         for(int i = 1; i < (size*size)/3; i ++){
             randMonster = biome.getRandomMonster();
@@ -146,7 +131,6 @@ public class Dungeon {
         for(List<Room> row : roomsGrid){
             for(Room room : row){
                 result += room.getClass().getSimpleName() + " ";
-                //System.out.println(room);
             }
             result += "\n";
         }

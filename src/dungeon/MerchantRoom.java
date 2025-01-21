@@ -2,6 +2,7 @@ package dungeon;
 
 import characters.Adventurer;
 import items.Item;
+import items.ItemsList;
 
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
@@ -18,6 +19,11 @@ public class MerchantRoom extends Room{
 
     public MerchantRoom(Item[] merchantInventory) {
         this.merchantInventory = merchantInventory;
+        generateInventory(new ItemsList[]{ItemsList.ARMOURS, ItemsList.ARMOURS, ItemsList.BOOTS, ItemsList.WEAPONS, ItemsList.WEAPONS});
+    }
+
+    public MerchantRoom() {
+        generateInventory(new ItemsList[]{ItemsList.ARMOURS, ItemsList.ARMOURS, ItemsList.BOOTS, ItemsList.WEAPONS, ItemsList.WEAPONS});
     }
 
     public void barter(Adventurer adventurer){
@@ -124,6 +130,12 @@ public class MerchantRoom extends Room{
         eventPane.setCharacterAttributes(aset, false);
         eventPane.replaceSelection("\n" + event);
 
+    }
+
+    public void generateInventory(ItemsList... items){
+        for(int i = 0; i < 5; i ++){
+            merchantInventory[i] = items[i].getRandomItem();
+        }
     }
 
     @Override

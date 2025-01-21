@@ -12,7 +12,7 @@ public class TestGUI {
 
         Adventurer hero = new Adventurer(100, 10, 500);
 
-        Dungeon floor = new Dungeon(5, Biomes.MOUNTAINS);
+        Dungeon floor = new Dungeon(5, Biomes.CAVE);
 
         floor.generateDungeon();
 
