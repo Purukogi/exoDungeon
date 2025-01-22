@@ -172,17 +172,20 @@ public class GameLoop {
                     }else{
 
                         if (floor.getRoomsGrid().get(i).get(j).getClass().getSimpleName().equals("MerchantRoom")){
-                            if(! (hero.getInventory().getEquipment().get("Ring 1") == null)
-                             && (hero.getInventory().getEquipment().get("Ring 1").getName().equals("Ring of Clarity")
-                                    || hero.getInventory().getEquipment().get("Ring 2").getName().equals("Ring of Clarity"))){
+                            if((! (hero.getInventory().getEquipment().get("Ring 1") == null)
+                             && (hero.getInventory().getEquipment().get("Ring 1").getName().equals("Ring of Clarity")))
+                            || (! (hero.getInventory().getEquipment().get("Ring 2") == null)
+                                    && (hero.getInventory().getEquipment().get("Ring 2").getName().equals("Ring of Clarity")))){
                                 map += '$';
                             }else{
                                 map += '█';
                             }
                         } else if(floor.getRoomsGrid().get(i).get(j).getClass().getSimpleName().equals("MonsterRoom")
                                 && ((MonsterRoom) floor.getRoomsGrid().get(i).get(j)).getMonster().isBoss()){
-                            if(! (hero.getInventory().getEquipment().get("Ring 1") == null) && (hero.getInventory().getEquipment().get("Ring 1").getName().equals("Ring of Clarity")
-                                    || hero.getInventory().getEquipment().get("Ring 2").getName().equals("Ring of Clarity"))){
+                            if((! (hero.getInventory().getEquipment().get("Ring 1") == null)
+                                    && (hero.getInventory().getEquipment().get("Ring 1").getName().equals("Ring of Clarity")))
+                                    || (! (hero.getInventory().getEquipment().get("Ring 2") == null)
+                                    && (hero.getInventory().getEquipment().get("Ring 2").getName().equals("Ring of Clarity")))){
                                 map += 'B';
                             }else{
                                 map += '█';
