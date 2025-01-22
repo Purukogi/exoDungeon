@@ -27,8 +27,8 @@ public enum ItemsList {
     RINGS(Arrays.asList(
             new Ring("Ring of Healing", 200),
             new Ring("Gold Ring", 500),
-            new Ring("Ring of Clarity", 150),
-            new Ring("Ring of Evasion", 300)
+            new Ring("Ring of Clarity", 150)
+            //new Ring("Ring of Evasion", 300)
             /*TODO ^^ implement a way to allow the player to see what monster he'll face and give a chance to flee
             */
     ));

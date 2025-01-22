@@ -1,5 +1,8 @@
 package controller;
 
+import biomes.Biomes;
+import dungeon.Dungeon;
+
 import javax.swing.*;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.SimpleAttributeSet;
@@ -8,6 +11,8 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.util.Random;
 
 public class GUI {
 
@@ -154,15 +159,52 @@ public class GUI {
         if(!event.isEmpty() && event.charAt(event.length() - 1) == '♕'){
 
             JFrame victoryWindow = new JFrame("VICTORY");
-            victoryWindow.setSize(250, 80);
+            victoryWindow.setSize(400, 200);
             victoryWindow.setLocation(475, 360);
+            GridLayout windowLayout = new GridLayout(2, 1);
+            victoryWindow.setLayout(windowLayout);
             victoryWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
             JTextArea victoryMessageArea = new JTextArea();
-            victoryMessageArea.setText("You beat the boss of the dungeon! \n You can now close the application.");
+            String bossMessage = "You beat the boss of the dungeon! " +
+                    "\nIn his belongings, you find a map to another dungeon." +
+                    "\nDo you want to go explore it?";
+            victoryMessageArea.setText(bossMessage);
             victoryWindow.add(victoryMessageArea);
+
+            JPanel buttonPanel = new JPanel();
+            JButton yesButton = new JButton("Of course!");
+            JButton noButton = new JButton("No, I need some rest.");
+            buttonPanel.add(yesButton);
+            buttonPanel.add(noButton);
+            victoryWindow.add(buttonPanel);
+
             victoryWindow.setVisible(true);
             victoryWindow.setAlwaysOnTop(true);
             victoryWindow.setAutoRequestFocus(true);
+
+            //events
+
+            yesButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    Random rand = new Random();
+                    Dungeon newFloor = new Dungeon(rand.nextInt(5, 15), Biomes.values()[rand.nextInt(Biomes.values().length - 1)]);
+                    //TODO ^^ BUGGY
+                    GameLoop newInstance = new GameLoop(newFloor, instance.getHero());
+                    GUI newWindow = new GUI(newInstance);
+
+                    newWindow.openGameWindow();
+
+                }
+            });
+
+            noButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    victoryWindow.dispatchEvent(new WindowEvent(victoryWindow, WindowEvent.WINDOW_CLOSING));
+                }
+            });
 
         }
         if(!event.isEmpty() && event.charAt(event.length() - 1) == '☠'){
