@@ -24,7 +24,7 @@ public class TestGameLoop {
         //testing ring drops
         int iterations = 1;
         while (hero.getInventory().getEquipment().get("Ring 1") == null){
-            MonsterRoom testRoom = new MonsterRoom(Biomes.MOUNTAINS.getRandomMonster());
+            MonsterRoom testRoom = new MonsterRoom(Biomes.MOUNTAINS.getRandomMonster(), 0);
             testRoom.exploreRoom(hero);
             iterations++;
         }

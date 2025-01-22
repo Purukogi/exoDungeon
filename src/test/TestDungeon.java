@@ -76,8 +76,8 @@ public class TestDungeon {
 
         Room room1 = new EmptyRoom();
         Room room2 = new HealingRoom();
-        Room room3 = new MonsterRoom(slime);
-        Room room4 = new MonsterRoom(orc);
+        Room room3 = new MonsterRoom(slime, 0);
+        Room room4 = new MonsterRoom(orc, 1);
         Room room5 = new TreasureRoom();
 
         //testing individual rooms and fight mechanics

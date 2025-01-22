@@ -189,12 +189,18 @@ public class GUI {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     Random rand = new Random();
-                    Dungeon newFloor = new Dungeon(rand.nextInt(5, 15), Biomes.values()[rand.nextInt(Biomes.values().length - 1)]);
-                    //TODO ^^ BUGGY
+                    Dungeon newFloor = new Dungeon(rand.nextInt(5, 15), Biomes.values()[rand.nextInt(Biomes.values().length - 1)], instance.getFloor().getLocalDifficulty() + 1);
+                    newFloor.generateDungeon();
                     GameLoop newInstance = new GameLoop(newFloor, instance.getHero());
                     GUI newWindow = new GUI(newInstance);
 
+                    victoryWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    victoryWindow.dispatchEvent(new WindowEvent(victoryWindow, WindowEvent.WINDOW_CLOSING));
+                    gameWindow.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    gameWindow.dispatchEvent(new WindowEvent(gameWindow, WindowEvent.WINDOW_CLOSING));
+
                     newWindow.openGameWindow();
+
 
                 }
             });

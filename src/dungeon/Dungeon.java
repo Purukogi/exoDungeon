@@ -12,6 +12,7 @@ public class Dungeon {
     private int size;
     private List<List<Room>> roomsGrid = new ArrayList<List<Room>>();
     private Biomes biome;
+    int localDifficulty;
 
     public Dungeon(int size) {
         this.size = size;
@@ -20,6 +21,12 @@ public class Dungeon {
     public Dungeon(int size, Biomes biome) {
         this.size = size;
         this.biome = biome;
+    }
+
+    public Dungeon(int size, Biomes biome, int localDifficulty) {
+        this.size = size;
+        this.biome = biome;
+        this.localDifficulty = localDifficulty;
     }
 
     public void addRoom(Room room){
@@ -71,13 +78,13 @@ public class Dungeon {
         Monster randMonster;
 
         randMonster = biome.getRandomMonster();
-        roomList.add(new MonsterRoom( new Monster("King " + randMonster.getName(), randMonster.getHealthPoints() + 30, randMonster.getDamageValue() + 5, true)));
+        roomList.add(new MonsterRoom( new Monster("King " + randMonster.getName(), randMonster.getHealthPoints() + 30, randMonster.getDamageValue() + 5, true), localDifficulty));
 
         roomList.add(new MerchantRoom());
 
         for(int i = 1; i < (size*size)/3; i ++){
             randMonster = biome.getRandomMonster();
-            roomList.add(new MonsterRoom( new Monster(randMonster.getName(), randMonster.getHealthPoints(), randMonster.getDamageValue())));
+            roomList.add(new MonsterRoom( new Monster(randMonster.getName(), randMonster.getHealthPoints(), randMonster.getDamageValue()), localDifficulty));
             int randInt = rand.nextInt(3);
             if(randInt == 2){
                 roomList.add(new TreasureRoom());
@@ -123,6 +130,14 @@ public class Dungeon {
 
     public List<List<Room>> getRoomsGrid() {
         return roomsGrid;
+    }
+
+    public int getLocalDifficulty() {
+        return localDifficulty;
+    }
+
+    public void setLocalDifficulty(int localDifficulty) {
+        this.localDifficulty = localDifficulty;
     }
 
     @Override

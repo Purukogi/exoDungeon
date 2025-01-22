@@ -26,7 +26,28 @@ public enum Biomes {
             new Monster("Goblin", 20, 5),
             new Monster("Orc", 30, 10),
             new Monster("Cave Spider", 50, 3),
-            new Monster("Skeleton", 30, 5)));
+            new Monster("Skeleton", 30, 5))),
+    BEACH(Arrays.asList(
+            new Monster("Drowned", 15, 5),
+            new Monster("Shark", 25, 6),
+            new Monster("Pirate", 20, 8),
+            new Monster("Jellyfish", 15, 3),
+            new Monster("Kraken", 40, 10)
+    )),
+    DESERT(Arrays.asList(
+            new Monster("Mummy", 20, 10),
+            new Monster("Coyote", 15, 5),
+            new Monster("Scorpion", 20, 8),
+            new Monster("Vulture", 15, 4),
+            new Monster("Giant Antlion", 40, 10)
+    )),
+    SWAMP(Arrays.asList(
+            new Monster("Carnivorous Plant", 20, 5),
+            new Monster("Leech", 15, 3),
+            new Monster("Ogre", 30, 8),
+            new Monster("Alligator", 20, 7),
+            new Monster("Rodent of Unusual Size", 40, 6)
+    ));
 
     private final List<Monster> bestiary;
 
