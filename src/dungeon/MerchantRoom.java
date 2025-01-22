@@ -150,7 +150,7 @@ public class MerchantRoom extends Room{
     public String toString(){
         String result = "";
         for(Item item : merchantInventory){
-            result += "> " + item.toString() + "\n";
+            result += "> " + item.toString() + "("  + item.getPrice() + "gp)" + "\n";
         }
         return result;
     }

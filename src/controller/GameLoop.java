@@ -65,6 +65,7 @@ public class GameLoop {
         }else{
             gui.updateEvents("You find yourself in an empty room, deep in a dungeon.\n Where do you want to go?");
             gui.updateMap();
+            gui.updateInventory();
         }
     }
 

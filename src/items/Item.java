@@ -28,6 +28,6 @@ public abstract class Item {
 
     @Override
     public String toString(){
-        return name + " (" + price + "gp)";
+        return name;
     }
 }

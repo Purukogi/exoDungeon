@@ -14,6 +14,7 @@ public class GUI {
     private JFrame gameWindow = new JFrame("Dungeon Explorer");
     private JTextPane eventPane = new JTextPane();
     private JTextPane mapPane = new JTextPane();
+    private JTextPane inventoryPane = new JTextPane();
     private GameLoop instance;
 
     public GUI(GameLoop instance) {
@@ -31,8 +32,12 @@ public class GUI {
 
 
         //panel regrouping the map and control buttons
-        final JPanel mapButtonsPanel = new JPanel(new GridLayout(2, 1));
+        final JPanel mapInventoryButtonsPanel = new JPanel(new GridLayout(2, 1));
         instance.startExploration();
+        final JPanel mapInventoryPanel = new JPanel(new GridLayout(1, 2));
+        mapInventoryPanel.add(mapPane);
+        mapInventoryPanel.add(inventoryPane);
+        inventoryPane.setBackground(Color.BLACK);
         mapPane.setBackground(Color.BLACK);
 
         final JPanel buttonsPanel = new JPanel(new GridLayout(3, 3));
@@ -50,15 +55,15 @@ public class GUI {
         buttonsPanel.add(downButton);
         buttonsPanel.add(new JPanel());
 
-        mapButtonsPanel.add(mapPane);
-        mapButtonsPanel.add(buttonsPanel);
+        mapInventoryButtonsPanel.add(mapInventoryPanel);
+        mapInventoryButtonsPanel.add(buttonsPanel);
 
         //panel for text descriptions
         eventPane.setBackground(Color.BLACK);
         JScrollPane scrollPane = new JScrollPane(eventPane);
 
         gameWindow.add(scrollPane);
-        gameWindow.add(mapButtonsPanel);
+        gameWindow.add(mapInventoryButtonsPanel);
 
         //events
 
@@ -68,6 +73,7 @@ public class GUI {
                 String buffer = instance.move("up");
                 updateEvents(buffer);
                 updateMap();
+                updateInventory();
                 checkGameEnd(buffer);
             }
         });
@@ -78,6 +84,7 @@ public class GUI {
                 String buffer = instance.move("right");
                 updateEvents(buffer);
                 updateMap();
+                updateInventory();
                 checkGameEnd(buffer);
             }
         });
@@ -88,6 +95,7 @@ public class GUI {
                 String buffer = instance.move("down");
                 updateEvents(buffer);
                 updateMap();
+                updateInventory();
                 checkGameEnd(buffer);
             }
         });
@@ -98,6 +106,7 @@ public class GUI {
                 String buffer = instance.move("left");
                 updateEvents(buffer);
                 updateMap();
+                updateInventory();
                 checkGameEnd(buffer);
             }
         });
@@ -128,6 +137,17 @@ public class GUI {
         eventPane.setCharacterAttributes(aset, false);
         eventPane.setText(event);
 
+    }
+
+    public void updateInventory(){
+        StyleContext sc = StyleContext.getDefaultStyleContext();
+        AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.WHITE);
+
+        aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+        aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+
+        inventoryPane.setCharacterAttributes(aset, false);
+        inventoryPane.setText(instance.getHero().getInventory().toString());
     }
 
     public void checkGameEnd(String event){

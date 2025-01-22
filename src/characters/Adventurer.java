@@ -2,7 +2,6 @@ package characters;
 
 import items.*;
 
-import java.util.PropertyResourceBundle;
 import java.util.Random;
 
 public class Adventurer extends Character {
