@@ -2,6 +2,7 @@ package controller;
 
 import characters.Adventurer;
 import dungeon.Dungeon;
+import dungeon.MonsterRoom;
 import dungeon.Room;
 
 import javax.swing.*;
@@ -168,7 +169,21 @@ public class GameLoop {
                             map += getCrossing(floor.getRoomsGrid().get(i).get(j));
                         }
                     }else{
-                        map += '█';
+
+                        if (floor.getRoomsGrid().get(i).get(j).getClass().getSimpleName().equals("MerchantRoom")){
+                            if(hero.getInventory().getEquipment().get("Ring 1").getName().equals("Ring of Clarity")
+                                    || hero.getInventory().getEquipment().get("Ring 2").getName().equals("Ring of Clarity")){
+                                map += '$';
+                            }
+                        } else if(floor.getRoomsGrid().get(i).get(j).getClass().getSimpleName().equals("MonsterRoom")
+                                && ((MonsterRoom) floor.getRoomsGrid().get(i).get(j)).getMonster().isBoss()){
+                            if(hero.getInventory().getEquipment().get("Ring 1").getName().equals("Ring of Clarity")
+                                    || hero.getInventory().getEquipment().get("Ring 2").getName().equals("Ring of Clarity")){
+                                map += 'B';
+                            }
+                        } else {
+                            map += '█';
+                        }
                     }
                 }
             }

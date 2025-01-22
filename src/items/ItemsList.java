@@ -23,6 +23,14 @@ public enum ItemsList {
             new Weapon("Rapier", 120, 5, false),
             new Weapon("Straight Sword", 180, 7, false),
             new Weapon("Mall", 250, 15, true)
+    )),
+    RINGS(Arrays.asList(
+            new Ring("Ring of Healing", 200),
+            new Ring("Gold Ring", 500),
+            new Ring("Ring of Clarity", 150),
+            new Ring("Ring of Evasion", 300)
+            /*TODO ^^ implement a way to allow the player to see what monster he'll face and give a chance to flee
+            */
     ));
 
     private final List<Item> itemList;

@@ -80,7 +80,7 @@ public class Dungeon {
             roomList.add(new MonsterRoom( new Monster(randMonster.getName(), randMonster.getHealthPoints(), randMonster.getDamageValue())));
             int randInt = rand.nextInt(3);
             if(randInt == 2){
-                roomList.add(new TreasureRoom(rand.nextInt(200)));
+                roomList.add(new TreasureRoom());
             }else{
                 roomList.add(new HealingRoom());
             }

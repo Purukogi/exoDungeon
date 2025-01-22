@@ -1,11 +1,9 @@
 package characters;
 
-import items.Armour;
-import items.Boots;
-import items.Inventory;
-import items.Weapon;
+import items.*;
 
 import java.util.PropertyResourceBundle;
+import java.util.Random;
 
 public class Adventurer extends Character {
 
@@ -46,6 +44,15 @@ public class Adventurer extends Character {
             if(monster.getHealthPoints() <= 0){
 
                 result += "You won! " + monster.getName() + " is no more! \n";
+                Random rand = new Random();
+                int ringRoll = rand.nextInt(10);
+                if (ringRoll == 1){
+                    Item foundRing = ItemsList.RINGS.getRandomItem();
+                    inventory.addItem(foundRing);
+                    result += "The " + monster.getName() + " had a " + foundRing.getName() +"!\n";
+                    result += "You quickly pocket it.";
+                }
+
                 if (monster.isBoss()){
                     result += "You defeated the boss of this dungeon! Congratulations!♕";
                 }
