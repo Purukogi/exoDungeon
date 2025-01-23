@@ -16,11 +16,12 @@ import java.util.Random;
 
 public class GUI {
 
-    private JFrame gameWindow = new JFrame("Dungeon Explorer");
+    private GameLoop instance;
+    private JFrame gameWindow = new JFrame();
     private JTextPane eventPane = new JTextPane();
     private JTextPane mapPane = new JTextPane();
     private JTextPane inventoryPane = new JTextPane();
-    private GameLoop instance;
+
 
     public GUI(GameLoop instance) {
         this.instance = instance;
@@ -39,6 +40,7 @@ public class GUI {
         //panel regrouping the map and control buttons
         final JPanel mapInventoryButtonsPanel = new JPanel(new GridLayout(2, 1));
         instance.startExploration();
+        gameWindow.setTitle("Dungeon Explorer - " + instance.getFloor().getBiome().name() + " - Level " + instance.getFloor().getLocalDifficulty());
         final JPanel mapInventoryPanel = new JPanel(new GridLayout(1, 2));
         mapInventoryPanel.add(mapPane);
         mapInventoryPanel.add(inventoryPane);
@@ -167,8 +169,10 @@ public class GUI {
 
             JTextArea victoryMessageArea = new JTextArea();
             String bossMessage = "You beat the boss of the dungeon! " +
-                    "\nIn his belongings, you find a map to another dungeon." +
+                    "\nIn his belongings, you find a healing potion " +
+                    "\nand a map to another dungeon." +
                     "\nDo you want to go explore it?";
+            instance.getHero().setHealthPoints(instance.getHero().getHealthPoints() + 20);
             victoryMessageArea.setText(bossMessage);
             victoryWindow.add(victoryMessageArea);
 

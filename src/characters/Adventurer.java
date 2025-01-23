@@ -71,6 +71,31 @@ public class Adventurer extends Character {
         return result;
     }
 
+    public boolean hasGoldRing(){
+        boolean check = (!(getInventory().getEquipment().get("Ring 1") == null)
+                && getInventory().getEquipment().get("Ring 1").getName().equals("Gold Ring"))
+                || (!(getInventory().getEquipment().get("Ring 2") == null)
+                && getInventory().getEquipment().get("Ring 2").getName().equals("Gold Ring"));
+        return check;
+    }
+
+    public boolean hasHealingRing(){
+        boolean check = (!(getInventory().getEquipment().get("Ring 1") == null)
+                && getInventory().getEquipment().get("Ring 1").getName().equals("Ring of Healing"))
+                || (!(getInventory().getEquipment().get("Ring 2") == null)
+                && getInventory().getEquipment().get("Ring 2").getName().equals("Ring of Healing"));
+        return check;
+    }
+
+    public boolean hasClarityRing(){
+        boolean check = (! (getInventory().getEquipment().get("Ring 1") == null)
+                && (getInventory().getEquipment().get("Ring 1").getName().equals("Ring of Clarity")))
+                || (! (getInventory().getEquipment().get("Ring 2") == null)
+                && (getInventory().getEquipment().get("Ring 2").getName().equals("Ring of Clarity")));
+
+        return check;
+    }
+
     public int getGoldPieces() {
         return goldPieces;
     }

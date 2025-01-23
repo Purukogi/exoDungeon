@@ -13,14 +13,11 @@ public class HealingRoom extends Room {
         if(!this.isAlreadyExplored()){
             Random rand = new Random();
             hpRestored = rand.nextInt(10, 30);
-            if( !(adventurer.getInventory().getEquipment().get("Ring 1") == null)
-                    && adventurer.getInventory().getEquipment().get("Ring 1").getName().equals("Ring of Healing")            ){
+
+            if(adventurer.hasHealingRing()){
                 hpRestored *= 2;
             }
-            if( !(adventurer.getInventory().getEquipment().get("Ring 2") == null)
-                    && adventurer.getInventory().getEquipment().get("Ring 2").getName().equals("Ring of Healing")            ){
-                hpRestored *= 2;
-            }
+
             String result = "You find a healing bassin. Your health is restored by " + hpRestored +".";
             adventurer.setHealthPoints(adventurer.getHealthPoints() + hpRestored);
             result += "\n\tYour health: " + adventurer.getHealthPoints();

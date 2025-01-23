@@ -140,6 +140,10 @@ public class Dungeon {
         this.localDifficulty = localDifficulty;
     }
 
+    public Biomes getBiome() {
+        return biome;
+    }
+
     @Override
     public String toString(){
         String result = "Dungeon size: " + size + "*" + size + " rooms\n";
